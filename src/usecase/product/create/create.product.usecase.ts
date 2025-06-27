@@ -20,7 +20,13 @@ export default class CreateProductUseCase {
       input.price,
     );
 
-    await this.productRepository.create(product as Product);
+    if (input.type === "a") {
+      const newProduct = product as Product;
+      await this.productRepository.create(newProduct);
+    } else if (input.type === "b") {
+      const newProduct = product as ProductB;
+      await this.productRepository.create(newProduct);
+    }
     
     return {
       id: product.id,
